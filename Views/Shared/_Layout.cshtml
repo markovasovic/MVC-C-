@@ -1,0 +1,130 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Rangeslidercss.css")
+    @Scripts.Render("~/bundles/jquery")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <link href="~/Content/countrySelect.css" rel="stylesheet" />
+
+
+
+</head>
+<body>
+    <div class="container ">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark  fixed-top">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">Navbar</a>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"><i class="fa fa-binoculars fa-fw" aria-hidden="true"></i> About us <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i> Contact <span class="sr-only">(current)</span></a>
+                    </li>
+
+                </ul>
+                <form class="form-inline my-2 my-lg-0 mr-lg-5 ">
+
+
+                    <ul class="navbar-nav">
+
+
+
+                        <li class="nav-item mr-lg-5 mt-2">
+
+
+
+
+                            @if (Session["user_email"] != null && Session["count"] != null)
+                            {
+
+                                <a href="https://localhost:44325/Home/ShopingCartList" style="color:white">Shoping cart <i class="fa fa-shopping-cart mr-lg-2 " aria-hidden="true" style="color:white">(@Session["count"].ToString())</i></a>
+                            }
+
+
+                        </li>
+
+                        <li class="nav-item">
+
+
+                            @{ if (Session["user_email"] != null)
+                                {
+                                    <div style="padding-top:8px;">
+                                        <a href="https://localhost:44325/UserCredentials/logout" style="color:white"> logout</a>
+                                    </div>
+
+                                }
+                                else
+                                {
+
+                                    <a href="https://localhost:44325/UserCredentials/Login" style="color:white;">Login</a><i class="fa fa-user fa-fw mr-lg-3 pl-lg-2" aria-hidden="true" style="color:white"></i>
+
+                                }
+
+                            }
+
+
+                        </li>
+
+                    </ul>
+
+
+
+
+
+
+                </form>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+
+        <flash dismissable="true" />
+
+        @RenderBody()
+    </div>
+
+
+
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/countrySelect.js"></script>
+   
+    <script>
+
+        $("#country_selector").countrySelect({
+            defaultStyling: "inside"
+        });
+
+        
+
+    </script>
+
+
+
+
+
+
+</body>
+</html>

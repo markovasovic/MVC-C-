@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+@{
+    if (Session["successfully"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+            Profile created succesfully <strong>Thank you !</strong>.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    };
+
+    Session["successfully"] = null;
+}
+
+
+<div class="row">
+    <div class="col-lg-6 pt-5 ">
+
+        <div class="card shadow-lg ">
+
+            <div class="card-header bg-light ">
+                <h6 class="text-center"> Enter email adress and password</h6>
+            </div>
+            @using (Html.BeginForm("Login", "UserCredentials"))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="card-body">
+
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address :</label>
+                            <input name="email" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password :</label>
+                            <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+
+                        </div>
+                        <div class="form-group">
+
+                            <label>Dont have account ?</label>
+                            <a href="https://localhost:44325/UserCredentials/Create_user_profile_page"><bold>click here</bold></a>
+                        </div><br />
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+
+
+                </div>
+            }
+        </div>
+
+
+
+
+
+
+    </div>
+</div>
+

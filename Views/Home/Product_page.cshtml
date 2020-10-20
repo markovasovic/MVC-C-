@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Shop.Models.Product>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
+
+
+
+@{
+    ViewBag.Title = "Product_page";
+}
+
+@{
+
+    if (Session["product_added"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+            product sucessfully added <strong> in your shoping cart !</strong>.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    Session["product_added"] = null;
+
+}
+<div class="row mt-lg-5">
+
+    <div class="col-lg-9">
+        @{ foreach (var item in Model)
+            {
+                <div class="card shadow-lg">
+                    <div class="row no-gutters" style="height:400px;">
+                        <div class="col-sm-5" style="background: #868e96;">
+                            <img id="img" style="width:100%; height:401px;" src="~/product_images/@item.img" 
+                                                               data-zoom-image="~/product_images_2/@item.img"
+                                                               class="card-img-top img-thumbnail " alt="...">
+                        </div>
+                        @using (@Html.BeginForm("Insert_product", "Home", new { product_id = item.id }))
+                        {
+                            <input type="hidden" value=@item.price name="price">
+
+                            <div class="card-body ">
+                                <div style="float:right">
+                                    <i class="fa fa-cart-plus fa-2x" aria-hidden="true"></i>
+                                </div>
+                                <h3 class="card-title">@item.name</h3>
+                                <p class="card-text mt-lg-2">@item.description</p>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-sm-4 mt-lg-3">
+                                        <label><bold> quantity</bold></label>
+                                        <select name="quantity">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 mt-lg-5">
+                                        <button style="width:180px;" type="submit" class="btn btn-success ">Add to BASKET</button>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+                        }
+
+                    </div>
+                </div>
+            }}
+
+
+    </div>
+
+</div>
+
+<script>
+
+    $("#img").ezPlus();
+
+</script>
+
+
+
+
+

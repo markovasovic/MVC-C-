@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Shop.Models.Cart_Item>
+
+
+@{
+    ViewBag.Title = "ShopingCartList";
+}
+
+    
+
+<p style="padding-top:50px;">
+    @Html.ActionLink("back to main page", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.multiply)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.multiply)
+            </td>
+            <td>
+
+                @Html.ActionLink("Delete", "DeleteShopingCart_prod",  new { id = item.id })
+            </td>
+        </tr>
+
+    }
+</table>
+
+<div class="cart float-lg-right">
+    <div class="card-title"> TOTAL AMOUNT:</div>
+    <div class="card-body">
+        @Session["total"].ToString()
+    </div>
+</div>
+
+@using (Html.BeginForm("InsertOrder", "OrdersController"))
+{
+    <div class="cart float-lg-left">
+        <div class="card-title"> </div>
+        <div class="card-body">
+            <a href="@Url.Action("PaymentWithPaypal","paypal")" class="btn btn-warning">BUY NOW</a>
+        </div>
+    </div>
+}
